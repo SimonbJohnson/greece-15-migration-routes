@@ -1,0 +1,30 @@
+#hdx-roea .dc-chart g.row text {
+    fill: black;
+    font-size:0.8em;
+}
+
+#hdx-roea .dc-chart .pie-slice {
+    fill:black;
+}
+
+#hdx-roea .x-axis-label{
+    font-size:0.8em;
+}
+
+#hdx-roea .dc-chart g.selected path {
+    stroke-width:1px !important;
+}
+
+#map{
+    height:474px;
+    width:100%;
+}
+
+.hdx-3w-info{
+    padding:5px;
+    background-color:white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    font-size:2em;
+ }
