@@ -11,8 +11,8 @@ dc.leafletChart = function (_chart) {
 
     var _tiles = function (map) {        
         L.tileLayer('https://data.hdx.rwlabs.org/mapbox-base-tiles/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+            
+        }).addTo(map);  
     };
 
     _chart._doRender = function () {
@@ -612,6 +612,10 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
     var _featureKey = function (feature) {
         return feature.key;
     };
+
+    var _widthLine = function (value, i) {
+        return 3;
+    };    
     
     function isSelectedGeo(d) {
         return _chart.hasFilter(d.key);
@@ -630,18 +634,21 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
                     options.fillColor = _chart.getColor(v.d.value, v.i);
                     options.color = _chart.getColor(v.d.value, v.i);
                     options.opacity = 0.8;
-                    options.fillOpacity = 0.5;                                
+                    options.fillOpacity = 0.5;
+                    options.weight = _chart.widthAccessor()(v.d.value, v.i);                                
                 } else {
                     options.fillColor = _chart.getColor(0, v.i);
                     options.color = _chart.getColor(0, v.i);
                     options.opacity = 0.8;
-                    options.fillOpacity = 0.5;                                
+                    options.fillOpacity = 0.5;
+                    options.weight = _chart.widthAccessor()(v.d.value, v.i);                                 
                 }
             } else {
                 options.fillColor = _chart.getColor(v.d.value, v.i);
                 options.color = _chart.getColor(v.d.value, v.i);
                 options.opacity = 0.8;
-                options.fillOpacity = 0.5;                 
+                options.fillOpacity = 0.5;
+                options.weight = _chart.widthAccessor()(v.d.value, v.i);                  
             }           
         }
         return options;
@@ -667,7 +674,7 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
             };
 
         _info.update = function (name) {
-                this._div.innerHTML = (name ? name: 'Hover for country name and risk index');
+                this._div.innerHTML = (name ? name: 'Hover migration route for name');
             };
 
         _info.addTo(_chart.map());
@@ -697,6 +704,14 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
             return _featureOptions;
         }
         _featureOptions = _;
+        return _chart;
+    };
+
+    _chart.widthAccessor = function (_) {
+        if (!arguments.length) {
+            return _widthLine;
+        }
+        _widthLine = _;
         return _chart;
     };
 

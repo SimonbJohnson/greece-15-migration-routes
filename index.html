@@ -7,44 +7,77 @@
         <link rel="stylesheet" type="text/css" href="css/dc.css"/>
         <link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
         <link rel="stylesheet" type="text/css" href="css/site.css"/>
+        <link rel="stylesheet" type="text/css" href="css/introjs.css"/>
         <script src="js/jquery.js"></script>
         <script src="js/d3.min.js"></script>
         <script src="js/crossfilter.v1.min.js"></script>
         <script src="js/dc.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/dc.leaflet.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/intro.js"></script>
         <script src="data/routes_geom.js"></script>      
     </head>
     <body>
         <div id="hdx-roea" class="container">
             <div class="row">
-                <p></p>
+                <h1>European Refugee Crisis Migration Routes</h1>
+                <div class="col-xs-8">                
+                    <p>A dashboard to explore data regarding the European Refugee Crisis and the migration routes used.  The graphs and maps can be clicked and interacted with to filter the data.  Click the Animate button to watch the migration routes change over time.  For extra help click the help button to the right.  The data was kindly provided by <a href="http://frontex.europa.eu/" target="_blank">Frontex</a>. For more information contact: <a href="https://twitter.com/Simon_B_Johnson">@simon_b_johnson</a>.</p>
+                </div>
+                <div class="col-xs-2">
+                    <button id="intro" class="btn btn-default">Help</button>  
+                </div>
+                <button id="clearfilters" class="btn btn-default">Reset Dashboard</button>                              
             </div>
+            <div id="total" class="row">
+                <div class="col-xs-12">
+                    <h4>Number of Refugees and Migrants matching current filters selected: <span id="number"></span></h4>
+                </div>
+            </div>            
             <div class="row">
                 <div class="col-xs-9">
                     <div class="row">
-                        <div id="time" class="col-xs-8">
+                        <div id="time" class="col-xs-8">                            
                             <h4>Time</h4>
+                            <p><button id="timeplay" class="btn btn-default">Animate graph</button>Current filter: <span class="filter"></span></p>
                         </div>
                         <div id="entrytype" class="col-xs-4">
                             <h4>Entry route type</h4>
+                            <p>Current filter: <span class="filter"></span></p>
                         </div>                        
                     </div>
                     <div class="row">
-                        <div id="map" class="col-xs-12">
-                            <h4>Map</h4>
-                        </div>                     
+                        <h4>Map</h4>
+                        <div id="map" class="col-xs-12"></div>                     
                     </div>    
                 </div>                
                 <div class="col-xs-3">
                     <div class="row">
                         <div id="country" class="col-xs-12">
                             <h4>Country of Origin</h4>
+                            <p>Current filter: <span class="filter"></span></p>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <div class="xs-col-12">
+                    <p>Source: FRAN data as of 17 August 2015</p>
+
+                    <p>* This designation is without prejudice to positions on status, and is in line with UNSCR 1244 and the ICJ Opinion on the Kosovo* declaration of independence.</p>
+                </div>
             </div>                                     
-        </div>              
+        </div>
+        <div id="modal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div id="loading" class="modal-body">
+                        <h2>Loading</h2>
+                    </div>
+                </div>
+            </div>
+        </div>                      
         <script src="js/site.js"></script> 
     </body>
 </html>
