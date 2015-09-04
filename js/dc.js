@@ -1217,6 +1217,8 @@ dc.baseMixin = function (_chart) {
             _chart.filter(filter);
             _chart.redrawGroup();
         });
+        //custmisation
+        clearInterval(timer);
     };
 
     /**

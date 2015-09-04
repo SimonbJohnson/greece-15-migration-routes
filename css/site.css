@@ -16,7 +16,7 @@
 }
 
 #map{
-    height:474px;
+    height:440px;
     width:100%;
 }
 
@@ -28,3 +28,12 @@
     border-radius: 5px;
     font-size:2em;
  }
+
+#time .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#timeplay {
+    margin-right:20px;
+}
