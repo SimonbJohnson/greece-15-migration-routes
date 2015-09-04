@@ -1,18 +1,22 @@
-#hdx-roea .dc-chart g.row text {
+.dc-chart g.row text {
     fill: black;
     font-size:0.8em;
 }
 
-#hdx-roea .dc-chart .pie-slice {
+.dc-chart .pie-slice {
     fill:black;
 }
 
-#hdx-roea .x-axis-label{
+.x-axis-label{
     font-size:0.8em;
 }
 
-#hdx-roea .dc-chart g.selected path {
+.dc-chart g.selected path {
     stroke-width:1px !important;
+}
+
+.container {
+    min-width:1000px;
 }
 
 #map{
