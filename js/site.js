@@ -17,12 +17,11 @@ function hxlProxyToJSON(input){
 
 function generateDashboard(data){
     var cf = crossfilter(data);
-
-    var timeDimension = cf.dimension(function(d){return d['#date+year+quarter'];});
+    var timeDimension = cf.dimension(function(d){return d['#date+quarter'];});
     var methodDimension = cf.dimension(function(d){return d['#x_route+landorsea']});
     var countryDimension = cf.dimension(function(d){return d['#affected+countryorigin']});
     var routeDimension = cf.dimension(function(d){return d['#x_route']+d['#x_route+landorsea']});
-
+    
     var timeGroup = timeDimension.group().reduceSum(function(d){return d['#x_value']});
     var methodGroup = methodDimension.group().reduceSum(function(d){return d['#x_value']});
     var countryGroup = countryDimension.group().reduceSum(function(d){return d['#x_value']});
@@ -166,7 +165,7 @@ var colors = ['#ccc','#ffffb2','#fecc5c','#fd8d3c','#e31a1c'];
 
 var color = '#1f77b4';
 
-var dataurl = 'http://proxy.hxlstandard.org/data.json?filter_count=7&url=https%3A//docs.google.com/spreadsheets/d/10F5vls-WgM6tj9RgK3TKOjYEtXDAapcxDFfh1tuXkzc/pub%3Fgid%3D0%26single%3Dtrue%26output%3Dcsv&strip-headers=on&format=html&filter01=cut&cut-include-tags01=x_route%2Cx_route%2Blandorsea%2Caffected%2Bcountryorigin%2Cx_value%2Cdate%2Byear%2Bquarter&cut-exclude-tags01=&filter02=&filter03=&filter04=&filter05=&filter06=&filter07=';
+var dataurl = 'http://proxy.hxlstandard.org/data.json?filter_count=7&url=https%3A//docs.google.com/spreadsheets/d/10F5vls-WgM6tj9RgK3TKOjYEtXDAapcxDFfh1tuXkzc/pub%3Fgid%3D0%26single%3Dtrue%26output%3Dcsv&strip-headers=on&format=html&filter01=cut&cut-include-tags01=x_route%2Cx_route%2Blandorsea%2Caffected%2Bcountryorigin%2Cx_value%2Cdate%2Bquarter&cut-exclude-tags01=&filter02=&filter03=&filter04=&filter05=&filter06=&filter07=&force=1';
 
 var time;
 var timeChart;
@@ -179,7 +178,9 @@ $.ajax({
     url: dataurl, 
     dataType: 'json',
     success:function(data){
-        generateDashboard(hxlProxyToJSON(dataReplace(data)));
+        data = dataReplace(data);
+        data = hxlProxyToJSON(data);
+        generateDashboard(data);
         $('#modal').modal('hide'); 
     },
     error:function(e,err){
