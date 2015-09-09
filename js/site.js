@@ -28,7 +28,8 @@ function generateDashboard(data){
     var routeGroup = routeDimension.group().reduceSum(function(d){return d['#x_value']});
     var totalGroup = cf.groupAll().reduceSum(function(d){return d['#x_value']});
 
-    
+    var tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.data.key+': '+d.data.value; });
+    var rowtip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.key+': '+d.value; });   
 
     timeChart = dc.barChart('#time').height(150).width($('#time').width())
         .dimension(timeDimension)
@@ -113,13 +114,22 @@ function generateDashboard(data){
 
     map = mapChart.map();
     map.scrollWheelZoom.disable();
-    zoomToGeom(routes_geom);        
+    zoomToGeom(routes_geom);
+
+    d3.selectAll('.bar').call(tip);
+    d3.selectAll('.bar').on('mouseover', tip.show).on('mouseout', tip.hide);
+
+    d3.selectAll('g.row').call(rowtip);
+    d3.selectAll('g.row').on('mouseover', rowtip.show).on('mouseout', rowtip.hide);
+
+    d3.selectAll('.pie-slice').call(tip);
+    d3.selectAll('.pie-slice').on('mouseover', tip.show).on('mouseout', tip.hide);                 
 }
 
-    function zoomToGeom(geom){
-        var bounds = d3.geo.bounds(geom);
-        map.fitBounds([[bounds[0][1],bounds[0][0]],[bounds[1][1],bounds[1][0]]]);
-    }   
+function zoomToGeom(geom){
+    var bounds = d3.geo.bounds(geom);
+    map.fitBounds([[bounds[0][1],bounds[0][0]],[bounds[1][1],bounds[1][0]]]);
+}   
 
 function autoAdvance(){
     if(time==25){
@@ -172,7 +182,9 @@ var timeChart;
 
 var quarters = ['2009 Q1','2009 Q2','2009 Q3','2009 Q4','2010 Q1','2010 Q2','2010 Q3','2010 Q4','2011 Q1','2011 Q2','2011 Q3','2011 Q4','2012 Q1','2012 Q2','2012 Q3','2012 Q4','2013 Q1','2013 Q2','2013 Q3','2013 Q4','2014 Q1','2014 Q2','2014 Q3','2014 Q4','2015 Q1'];
 var timer
-$('#modal').modal('show'); 
+
+$('#modal').modal('show');
+
 $.ajax({ 
     type: 'GET', 
     url: dataurl, 
@@ -190,7 +202,7 @@ $.ajax({
 
 $('#timeplay').on('click',function(){
     time =0;
-    timer = setInterval(function(){autoAdvance()}, 1000);
+    timer = setInterval(function(){autoAdvance()}, 2000);
 });
 
 $('#clearfilters').on('click',function(){
