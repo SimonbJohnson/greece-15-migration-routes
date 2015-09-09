@@ -28,8 +28,8 @@ function generateDashboard(data){
     var routeGroup = routeDimension.group().reduceSum(function(d){return d['#x_value']});
     var totalGroup = cf.groupAll().reduceSum(function(d){return d['#x_value']});
 
-    var tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.data.key+': '+d.data.value; });
-    var rowtip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.key+': '+d.value; });   
+    var tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.data.key+': '+d3.format('0,000')(d.data.value); });
+    var rowtip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d.key+': '+d3.format('0,000')(d.value); });   
 
     timeChart = dc.barChart('#time').height(150).width($('#time').width())
         .dimension(timeDimension)

@@ -759,7 +759,7 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
         var v = _dataMap[_chart.featureKeyAccessor()(feature)];
                 layer.on("mouseover",function(){
                     if(v!==undefined){
-                        var info = _chart.popup()(feature) +": " +v.d.value;
+                        var info = _chart.popup()(feature) +": " +d3.format('0,000')(v.d.value);
                     } else {
                         var info = _chart.popup()(feature);
                     }
