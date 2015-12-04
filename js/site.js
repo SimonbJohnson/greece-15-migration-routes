@@ -175,7 +175,7 @@ var colors = ['#ccc','#ffffb2','#fecc5c','#fd8d3c','#e31a1c'];
 
 var color = '#1f77b4';
 
-var dataurl = 'http://proxy.hxlstandard.org/data.json?filter_count=7&url=https%3A//docs.google.com/spreadsheets/d/10F5vls-WgM6tj9RgK3TKOjYEtXDAapcxDFfh1tuXkzc/pub%3Fgid%3D0%26single%3Dtrue%26output%3Dcsv&strip-headers=on&format=html&filter01=cut&cut-include-tags01=x_route%2Cx_route%2Blandorsea%2Caffected%2Bcountryorigin%2Cx_value%2Cdate%2Bquarter&cut-exclude-tags01=&filter02=&filter03=&filter04=&filter05=&filter06=&filter07=';
+var dataurl = 'https://proxy.hxlstandard.org/data.json?filter_count=7&url=https%3A//docs.google.com/spreadsheets/d/10F5vls-WgM6tj9RgK3TKOjYEtXDAapcxDFfh1tuXkzc/pub%3Fgid%3D0%26single%3Dtrue%26output%3Dcsv&strip-headers=on&format=html&filter01=cut&cut-include-tags01=x_route%2Cx_route%2Blandorsea%2Caffected%2Bcountryorigin%2Cx_value%2Cdate%2Bquarter&cut-exclude-tags01=&filter02=&filter03=&filter04=&filter05=&filter06=&filter07=';
 
 var time;
 var timeChart;
